@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Customer | Dashboard</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/order"><-Back</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                
+            </div>
+        </div>
+    </nav>
+        <% if(typeof(orderdata) !='undefined' ) {%>
+            <% orderdata.forEach(function(data) { %>
+                <div class="row m-5 border border-2 p-2 mb-5">
+                    <div class="col-md-12 mt-2 mb-2">
+                        <h1 class="fw-bold">OrderID: #<%= data.orderid._id %>
+                        </h1>
+                        <h6 class="text-secondary">
+                            Booked On: <%= data.orderid.date %>
+                        </h6>
+                        <h5 class="fw-bold">Total: &#8377; <%= data.orderid.totalamount %>
+                        </h5>
+                        <br>
+                        <h6 class="text-secondary">
+                            <%= data.addressid.name %>
+                        </h6>
+                        <h6 class="text-secondary">
+                            <%= data.addressid.address %>
+                        </h6>
+                        <h6 class="text-secondary">
+                            <%= data.addressid.mobile %>
+                        </h6>
+                        <h6 class="text-secondary">
+                            <%= data.addressid.email %>
+                        </h6>
+                        <h6 class="text-secondary">
+                            <%= data.addressid.city %>
+                        </h6>
+                        <h6 class="text-secondary">
+                            <%= data.addressid.pincode %>
+                        </h6>
+                        <br>
+                    </div>
+                    <div class="m-2 row border border-2" style="width: 97%;">
+                        <div class="col-md-6 mt-2">
+                            <h4 class="fw-bold">
+                                <%= data.productid.productname %>
+                            </h4>
+                            <h6 class="text-secondary fw-bold">
+                                <%= data.quantity %> qty
+                            </h6>
+                            <h4 class="fw-bold">
+                                &#8377; <%= data.productid.price %>
+                            </h4>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    
+                                    <% if(data.status==false) {%>
+                                        <h6 class="text-secondary">Status: <span
+                                                class="text-success fw-bold">Pending</span>
+                                        </h6>
+                                        <% } else { %>
+                                            <h6 class="text-secondary">Status: <span
+                                                    class="text-primary fw-bold">Delivered</span>
+                                            </h6>
+                                            <% } %>
+
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <% if(data.status==false) { %>
+                                        <form action="/admin/delivered/<%= data._id %>" method="POST">
+                                            <input type="hidden" name="hidden">
+                                            <input type="submit" value="Delivered" class="btn btn-primary">
+                                        </form>
+                                        <%} %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2 mb-2">
+                            <img src="/uploads/<%= data.productid.image %>" alt="image"
+                                style="width: 200px; object-fit: contain;">
+                        </div>
+                    </div>
+
+                </div>
+                <%})%>
+                    <%} %>
+
+</body>
+
+</html>

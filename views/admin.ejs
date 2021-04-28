@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<!--
+	Prologue by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Admin Page</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header">
+
+				<div class="top">
+
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+							<h1 id="title">Admin</h1>
+							<li><a href="/logout" id="logout"><span class="icon solid fa-user">Log Out</span></a></li>
+								 
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Add Product</span></a></li>
+								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Stock</span></a></li>
+								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Complaints</span></a></li>
+								<li><a href="#orders" id="orders-link"><span class="icon solid fa-envelope">Orders</span></a></li>
+								<li><a href="#outofstock" id="outofstock-link"><span class="icon solid fa-envelope">Out Of Stock</span></a></li>
+												
+							</ul>
+						</nav>
+
+				</div>
+
+				<div class="bottom">
+
+					<!-- Social Icons -->
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+
+				</div>
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Intro -->
+					<section id="top" class="one dark cover">
+						<div class="container">
+
+							<header>
+								<form method="post"  action="/admin/add" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-12 col-12-mobile"><input type="text" name="prdname" placeholder="Product Name" /></div>
+									
+									<div class="col-12">
+										<input type="text"   title="Enter Number" name="Quantity" placeholder="Quantity" />
+									</div>
+									<div class="col-12">
+										<input type="text"   title="Enter a Valid price" name="price" placeholder="price" />
+									</div>
+									<div class="col-12">
+							
+										<label name="category" placeholder="Category"></label>
+                    <select name="category" id="category">
+                        <option value="Grocery">Grocery</option>
+                        <option value="Stationary">Stationary</option>
+                        <option value="Vegetables">Vegetables</option>                        
+                      </select>
+									</div>
+									<div class="col-12">
+										<input type="file" name="image" placeholder="image" />
+									</div>
+									<div class="col-12">
+										<input type="submit" value="Submit" />
+									</div>
+								</div>
+							</form>
+							</header>
+
+							
+
+						</div>
+					</section>
+
+				<!-- Portfolio -->
+					<section id="portfolio" class="two">
+						<div class="container">
+
+							<header>
+								<h2>Portfolio</h2>
+							</header>
+
+							<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product Namet</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">price</th>
+	  <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <% if(typeof(products) !='undefined' ) { %>
+	<% products.forEach(function(product) { %>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td><%=product.productname %></td>
+      <td><%=product.quantity %></td>
+      <td><%=product.price %></td>
+	  <td><img style="width: 50px;height:50px" src='/uploads/<%=product.image %>'></td>
+	  <td><a href="/admin/deleteproduct/<%=product._id%>" class="btn btn-danger">Delete</a></td>
+	  <td><a href="/admin/updateproduct/<%=product._id%>" class="btn btn-primary">Edit</a></td>
+    </tr>
+  
+  </tbody>
+  <% }) %>
+                            <% } else { %>
+                                <h1>There is no products</h1>
+                                <% } %>
+</table>
+
+						</div>
+					</section>
+
+				<!-- About Me -->
+					<section id="about" class="three">
+						<div class="container">
+
+							<header>
+								<form>
+									<div class="form-group">
+									  <label for="exampleInputEmail1">Product Name</label>
+									  <input type="email" class="form-control" id="prdname" aria-describedby="emailHelp" placeholder="Enter Product name">
+									  </div>
+									<div class="form-group">
+									  <label for="exampleInputPassword1">Quantity</label>
+									  <input type="password" class="form-control" id="Quantity" placeholder="Quantity">
+									</div>
+									<div class="form-group">
+									  <label for="exampleInputPassword1">Price</label>
+									  <input type="password" class="form-control" id="price" placeholder="price">
+									</div>
+									
+										<div class="form-group">
+										  <label for="exampleFormControlFile1">Product image</label>
+										  <input type="file" class="form-control-file" id="image">
+										</div>
+									
+									
+									<button type="submit" class="btn btn-primary">Submit</button>
+								  </form>
+							</header>
+
+							
+
+						</div>
+					</section>
+
+				<!-- Contact -->
+					<section id="contact" class="four">
+						<div class="container">
+
+							<header>
+								<h2>Portfolio</h2>
+							</header>
+
+							<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Subject</th>
+	  <th scope="col">Message</th>
+    </tr>
+  </thead>
+  <% if(typeof(contacts) !='undefined' ) { %>
+	<% contacts.forEach(function(contact) { %>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td><%=contact.uname %></td>
+      <td><%=contact.email %></td>
+      <td><%=contact.subject %></td>
+      <td><%=contact.message %></td>
+	  <td><button id="someButton"><a href="https://mail.google.com/mail/u/0/#inbox?compose=new">
+		<b>RESPOND</b></a></button></td>
+	  
+    </tr>
+  
+  </tbody>
+  <% }) %>
+                            <% } else { %>
+                                <h1>There is no products</h1>
+                                <% } %>
+</table>
+
+						
+						</div>
+					</section>
+
+
+					<section id="orders" class="five">
+						<div class="container">
+
+							<header>
+								<h2>Orders</h2>
+							</header>
+
+							<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Order ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Amount</th>
+	
+	  <th scope="col"></th>
+    </tr>
+  </thead>
+  <% if(typeof(orderData) !='undefined' ) { %>
+	<% orderData.forEach(function(order) { %>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td><%=order._id%></td>
+      <td><%=order.date %></td>
+      <td><%=order.totalamount %></td>
+	  <td><a href="/admin/order/<%= order._id %>" class="btn btn-primary">View Details</a></td>
+	  
+	  
+    </tr>
+  
+  </tbody>
+  <% }) %>
+                            <% } else { %>
+                                <h1>There is no products</h1>
+                                <% } %>
+</table>
+
+						</div>
+					</section>
+
+
+
+					<section id="outofstock" class="four">
+						<div class="container">
+
+							<header>
+								<h2>Out of stock</h2>
+							</header>
+
+							<h1>
+								
+							</h1>
+							<div class="row ">
+								<% if(typeof(outofstocks) !='undefined' && outofstocks.length!="0" ) { %>
+									<% outofstocks.forEach(function(outofstock) { %>
+										<div class="card" style="width: 18rem;">
+											<img src='/uploads/<%=outofstock.image %>' style="width: 50%"
+												class="card-img-top mx-auto d-block img-fluid" alt="image">
+											<div class="card-body">
+												<h5 class="card-title">
+													<%=outofstock.productname %>
+												</h5>
+												<form action="/admin/updatequantity/<%=outofstock._id%>" method="post">
+													<div class="mb-3">
+														<label for="quantity" class="form-label">Quantity</label>
+														<input type="number" class="form-control" id="quantity" name="quantity"
+															value="<%= outofstock.quantity %>" placeholder="Quantity" required>
+													</div>
+													<div class="mb-3">
+														<input class="btn btn-primary" type="submit" value="Update Quantity">
+													</div>
+												</form>
+				
+											</div>
+										</div>
+										<% }) %>
+											<% } else { %>
+												<h1>There is no products</h1>
+												<% } %>
+							</div>
+
+						</div>
+						</div>
+					</section>
+
+					<section id="top" class="one dark cover">
+						
+					</section>
+
+
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+
+				<!-- Copyright -->
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
